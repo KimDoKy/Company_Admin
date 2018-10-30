@@ -1,10 +1,13 @@
 *.swp
 .python-version
 .DS_Store
-<<<<<<< HEAD
 db.sqlite3
-=======
->>>>>>> accounts
+*.log
+*.pot
+*.pyc
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
 
 # Created by https://www.gitignore.io/api/git,python,django
 
