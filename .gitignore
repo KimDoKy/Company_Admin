@@ -1,7 +1,10 @@
 *.swp
 .python-version
 .DS_Store
+<<<<<<< HEAD
 db.sqlite3
+=======
+>>>>>>> accounts
 
 # Created by https://www.gitignore.io/api/git,python,django
 
