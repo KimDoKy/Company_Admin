@@ -28,7 +28,7 @@ class CustomUser(AbstractUser):
             ('lv12','대표이사'),
             )
     name = models.CharField(max_length=10)
-    team = models.ManyToManyField('Team', blank=True)
+    team = models.ForeignKey('Team', blank=True, null=True, on_delete=models.PROTECT)
     level = models.CharField(max_length=20, choices=SELECT_LV)
     number = models.CharField(max_length=14, blank=True)
     phone = models.CharField(max_length=14, blank=True)
