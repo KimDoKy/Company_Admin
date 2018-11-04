@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class Team(models.Model):
-    team_1 = models.CharField(max_length=20)
-    team_2 = models.ForeignKey('accounts.Team', on_delete=models.CASCADE, null=True, blank=True)
+    team_1 = models.CharField(max_length=20, verbose_name='부서')
+    team_2 = models.ForeignKey('accounts.Team', on_delete=models.CASCADE, null=True, blank=True, verbose_name='팀')
 
     def __str__(self):
         if self.team_2:
@@ -27,12 +27,12 @@ class CustomUser(AbstractUser):
             ('lv11','이사'),
             ('lv12','대표이사'),
             )
-    name = models.CharField(max_length=10)
-    team = models.ForeignKey('Team', blank=True, null=True, on_delete=models.PROTECT)
-    level = models.CharField(max_length=20, choices=SELECT_LV)
-    number = models.CharField(max_length=14, blank=True)
-    phone = models.CharField(max_length=14, blank=True)
-    birth = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=10, verbose_name='이름')
+    team = models.ForeignKey('Team', blank=True, null=True, on_delete=models.PROTECT, verbose_name='부서')
+    level = models.CharField(max_length=20, choices=SELECT_LV, verbose_name='직급')
+    number = models.CharField(max_length=14, blank=True, verbose_name='전화번호')
+    phone = models.CharField(max_length=14, blank=True, verbose_name='휴대폰번호')
+    birth = models.DateField(blank=True, null=True, verbose_name='생년월일')
     email = models.EmailField(blank=True, null=True)
 
     def __str__(self):
