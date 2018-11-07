@@ -70,6 +70,17 @@ class PayCard(models.Model):
         return f'{self.card_sell}'
 
 
+# 카드사
+class CardComp(models.Model):
+    card_company = models.CharField(max_length=10, verbose_naem='카드사')
+
+    class Meta:
+        verbose_name_plural = '카드사'
+
+    def __str__(self):
+        return f'{self.card_company}'
+
+
 # 현금 결제
 class PayBank(models.Model):
     BANK_SELECT = (
