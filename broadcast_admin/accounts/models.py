@@ -5,6 +5,9 @@ class Team(models.Model):
     team_1 = models.CharField(max_length=20, verbose_name='부서')
     team_2 = models.ForeignKey('accounts.Team', on_delete=models.CASCADE, null=True, blank=True, verbose_name='팀')
 
+    class Meta:
+        verbose_name_plural = '부서'
+
     def __str__(self):
         if self.team_2:
             return f'[{self.team_2}] - [{self.team_1}]'
@@ -34,6 +37,9 @@ class CustomUser(AbstractUser):
     phone = models.CharField(max_length=14, blank=True, verbose_name='휴대폰번호')
     birth = models.DateField(blank=True, null=True, verbose_name='생년월일')
     email = models.EmailField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = '사용자'
 
     def __str__(self):
         return f'{self.username}'
