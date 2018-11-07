@@ -29,7 +29,7 @@ class PaymentComp(models.Model):
     class Meta:
         verbose_name_plural = '승인회사'
 
-
+# 결제 수단
 class PaymentMethod(models.Model):
     PAY_METHOD = (
             ('card','카드'),
@@ -50,3 +50,21 @@ class PaymentMethod(models.Model):
 
     def __str__(self):
         return f'{self.pmt_mtd}'
+
+
+# 카드 결제
+class PayCard(models.Model):
+    card_sell = models.CharField(max_length=14, verbose_name='판매금액')
+    card_comp = models.ForeignKey('CardComp', on_delete=models.PROTECT, verbose_name='카드사')
+    card_num = models.CharField(max_length=20, verbose_name='카드번호')
+    card_sell_date = models.DateField(verbose_naem='결제일')
+    card_life = models.CharField(max_length=8, verbose_name='카드유효기간')
+    card_approval_num = models.CharField(max_length=10, verbose_name='승인번호')
+    card_plan = models.IntegerField(verbose_name='할부개월수')
+    card_money = models.CharField(max_length=14, verbose_name='결제금액')
+
+    class Meta:
+        verbose_name_plural = '카드결제'
+
+    def __str__(self):
+        return f'{self.card_sell}'
