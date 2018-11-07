@@ -28,3 +28,25 @@ class PaymentComp(models.Model):
 
     class Meta:
         verbose_name_plural = '승인회사'
+
+
+class PaymentMethod(models.Model):
+    PAY_METHOD = (
+            ('card','카드'),
+            ('bank','현금'),
+            )
+    pmt_mtd = models.CharField(max_length=10, choices=PAY_METHOD, verbose_name='결제수단')
+    pmt_card = models.ForeignKey('PayCard', on_delete=models.PROTECT, blank=True, null=True, verbose_name='카드결제')
+    pmt_bank = models.ForeignKey('PayBank', on_delete=models.PROTECT, blank=True, null=True, verbose_name='현금결제')
+
+    class Meta:
+        verbose_name_plural = '결제수단'
+
+    def get_method(self):
+        if self.pmt_mtd == 'card':
+            return self.pmt_card
+        else:
+            return self.pmt_bak
+
+    def __str__(self):
+        return f'{self.pmt_mtd}'
