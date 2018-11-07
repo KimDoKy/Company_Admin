@@ -18,3 +18,13 @@ class Payment(models.Model):
 
     def __str__(self):
         return f'{self.pmt_money}'
+
+# 결제 승인회사
+class PaymentComp(models.Model):
+    company = models.CharField(max_length=10, unique=True, verbose_naem='승인회사')
+
+    def __str__(self):
+        return f'{self.company}'
+
+    class Meta:
+        verbose_name_plural = '승인회사'
