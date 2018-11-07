@@ -68,3 +68,20 @@ class PayCard(models.Model):
 
     def __str__(self):
         return f'{self.card_sell}'
+
+
+# 현금 결제
+class PayBank(models.Model):
+    BANK_SELECT = (
+            ()
+            )
+    bank_money = models.CharField(max_length=14, verbose_name='입금금액')
+    bank_name = models.CharField(max_length=10, choices=BANK_SELECT, verbose_name='입금은행')
+    bank_in_name = models.CharField(max_length=10, verbose_naem='입금자명')
+    bank_date = models.DateField(verbose_name='입금일')
+
+    class Meta:
+        verbose_name_plural = '현금결제'
+
+    def __str__(self):
+        return f'{self.bank_name}'
