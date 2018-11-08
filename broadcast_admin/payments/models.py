@@ -1,7 +1,7 @@
 from django.db import models
 
 class Payment(models.Model):
-    pmt_money = models.CharField(max_length=14, verbose_name='결제금액')
+    pmt_money = models.IntegerField(verbose_name='결제금액')
     pmt_sell = models.IntegerField(blank=True, null=True, verbose_name='판매금액')
     pmt_tax = models.IntegerField(blank=True, null=True, verbose_name='부가세')
     pmt_comp = models.ForeignKey('PaymentComp', on_delete=models.PROTECT, verbose_name='승인회사')
@@ -17,7 +17,7 @@ class Payment(models.Model):
         verbose_name_plural = '결제'
 
     def __str__(self):
-        return f'{self.pmt_money}'
+        return format(int(self.pmt_money), ',') 
 
 # 결제 승인회사
 class PaymentComp(models.Model):

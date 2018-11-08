@@ -1,7 +1,16 @@
 from django.contrib import admin
+from django.contrib.humanize.templatetags.humanize import intcomma
 from .models import *
 
-admin.site.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    fields = ['pmt_sell',]
+    list_display = ['pmt_sell_comma',]
+
+    def pmt_sell_comma(self, payment):
+        c = intcomma(payment.pmt_sell)
+        return c 
+
+admin.site.register(Payment, PaymentAdmin)
 admin.site.register(PaymentComp)
 admin.site.register(PaymentMethod)
 admin.site.register(PayCard)
