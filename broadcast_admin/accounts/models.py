@@ -2,17 +2,18 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class Team(models.Model):
-    team_1 = models.CharField(max_length=20, verbose_name='부서')
-    team_2 = models.ForeignKey('accounts.Team', on_delete=models.CASCADE, null=True, blank=True, verbose_name='팀')
+    team_code = models.CharField(max_length=10, auto_created=True, verbose_name='부서코드')
+    team_name = models.CharField(max_length=10, verbose_name='부서명')
+    team_deps = models.ForeignKey('accounts.Team', on_delete=models.CASCADE, null=True, blank=True, verbose_name='상위부서')
 
     class Meta:
         verbose_name_plural = '부서'
 
     def __str__(self):
-        if self.team_2:
-            return f'[{self.team_2}] - [{self.team_1}]'
+        if self.team_deps:
+            return f'{self.team_deps} - {self.team_name}'
         else:
-            return f'[{self.team_1}]'
+            return f'[{self.team_name}]'
 
 
 class CustomUser(AbstractUser):
