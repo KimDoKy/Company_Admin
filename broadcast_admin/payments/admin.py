@@ -3,7 +3,7 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from .models import *
 
 class PaymentAdmin(admin.ModelAdmin):
-    fields = ['pmt_sell',]
+    fields = ['pmt_money','pmt_comp','pmt_method']
     list_display = ['pmt_sell_comma',]
 
     def pmt_sell_comma(self, payment):

@@ -8,5 +8,6 @@ class Product(models.Model):
 
     class Meta:
         verbose_name_plural = '상품'
+        
     def __str__(self):
         return f'{self.prod_name}'
