@@ -3,7 +3,7 @@ from django.db import models
 class Customer(models.Model):
     adver_name = models.CharField(max_length=5, verbose_name='대표자')
     comp_name = models.CharField(max_length=20, verbose_name='상호명')
-    comp_num = models.CharField(max_length=8, verbose_name='사업자번호')
+    comp_num = models.CharField(max_length=12, verbose_name='사업자번호')
     comp_uptae = models.CharField(max_length=15, verbose_name='업태')
     comp_upjong = models.CharField(max_length=20, verbose_name='업종')
     comp_post = models.CharField(max_length=10, verbose_name='우편번호')
