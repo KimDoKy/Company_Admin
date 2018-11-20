@@ -15,6 +15,9 @@ class Customer(models.Model):
     comp_people = models.CharField(max_length=5, verbose_name='담당자')
     comp_url = models.TextField(verbose_name='URL')
 
+    class Meta:
+        verbose_name_plural = '고객사'
+
     def __str__(self):
         return f'{self.comp_name}'
 
