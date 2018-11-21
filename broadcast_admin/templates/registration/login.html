@@ -1,6 +1,9 @@
-<h2>로그인</h2>
+{% load static %}
+<center>
+<img src="{% static 'accounts/main_img.jpg' %}" alt='main img' style="width:100%">
 <form method='post'>
   {% csrf_token %}
   {{ form.as_p }}
   <input type='submit' value='login'>
 </form>
+</center>
