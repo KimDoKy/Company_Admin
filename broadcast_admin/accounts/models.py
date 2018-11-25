@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 class Team(models.Model):
     team_code = models.CharField(max_length=10, auto_created=True, verbose_name='부서코드')
@@ -15,6 +15,8 @@ class Team(models.Model):
         else:
             return f'[{self.team_name}]'
 
+class CustomUserManager(UserManager):
+    pass
 
 class CustomUser(AbstractUser):
     SELECT_LV = (

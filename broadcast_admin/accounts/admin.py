@@ -12,15 +12,15 @@ class TeamAdmin(admin.ModelAdmin):
 class TeamInline(admin.TabularInline):
     model = Team
 
-class UserAdmin(admin.ModelAdmin):
+class UserCustomAdmin(admin.ModelAdmin):
+    model = CustomUser
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    model = CustomUser
-    list_display = ['name', 'level', 'team']
+    list_display = ['username', 'level', 'team']
     fields = ['username', 'name', 'level', 'team', 'number', 'phone', 'birth', 'email']
     inline = [
         TeamInline,
         ]
 
-admin.site.register(CustomUser, UserAdmin)
+admin.site.register(CustomUser, UserCustomAdmin)
 admin.site.register(Team, TeamAdmin)
