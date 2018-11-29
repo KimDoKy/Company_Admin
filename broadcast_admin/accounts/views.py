@@ -12,5 +12,5 @@ class SignUp(generic.CreateView):
 
 def profile(request):
     username = request.user.get_username()
-    user = CustomUser.objects.get(username=username)
+    user = CustomUser.objects.get(custom_username=username)
     return render(request, 'profile.html', {'user':user})

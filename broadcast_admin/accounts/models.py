@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class Team(models.Model):
     team_code = models.CharField(max_length=10, auto_created=True, verbose_name='부서코드')
@@ -15,10 +15,29 @@ class Team(models.Model):
         else:
             return f'[{self.team_name}]'
 
-class CustomUserManager(UserManager):
-    pass
+class CustomUserManager(BaseUserManager):
+    def create_user(self, custom_username, password):
+        user = self.model(custom_username=custom_username, password=password)
+        user.set_password(password)
+        user.is_staff = False
+        user.is_superuser = False
+        user.save(using=self._db)
+        return user
 
-class CustomUser(AbstractUser):
+    def create_superuser(self, custom_username, password):
+        user = self.create_user(custom_username=custom_username, password=password)
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+    def get_by_natural_key(self, custom_username):
+        print(custom_username)
+        return self.get(custom_username=custom_username)
+
+class CustomUser(AbstractBaseUser):
+    objects = CustomUserManager()
     SELECT_LV = (
             ('lv1','사원'),
             ('lv2','주임'),
@@ -33,6 +52,11 @@ class CustomUser(AbstractUser):
             ('lv11','이사'),
             ('lv12','대표이사'),
             )
+    custom_username = models.CharField(max_length=20, verbose_name='아이디', unique=True)
+    USERNAME_FIELD = 'custom_username'
+    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
     name = models.CharField(max_length=10, verbose_name='이름')
     team = models.ForeignKey('Team', blank=True, null=True, on_delete=models.PROTECT, verbose_name='부서')
     level = models.CharField(max_length=20, choices=SELECT_LV, verbose_name='직급')
@@ -46,3 +70,12 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f'{self.username}'
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def is_staff(self):
+        return self.is_admin
