@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'product',
     'payments',
     'customers',
+    'board',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
