@@ -8,6 +8,7 @@ db.sqlite3
 */*/*/__pycache__/
 */*/__pycache__/
 */__pycache__/
+.idea
 
 # Created by https://www.gitignore.io/api/git,python,django
 
