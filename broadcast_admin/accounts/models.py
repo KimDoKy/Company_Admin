@@ -69,7 +69,7 @@ class CustomUser(AbstractBaseUser):
         verbose_name_plural = '사용자'
 
     def __str__(self):
-        return f'{self.username}'
+        return f'{self.custom_username}'
 
     def has_perm(self, perm, obj=None):
         return True
