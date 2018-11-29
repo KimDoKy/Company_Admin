@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
+{% block title %}Profile{% endblock %}
+
 {% block content %}
-<h2>공지 사항</h2>
+{% if user.is_authenticated %}
+<p>로그인 되었습니다.</p>
+{{ user.username }}
+{{ user.team }}
+<br>
+<table>
+  <tr>
+    <th>No</th>
+    <th>제목</th>
+    <th>글쓴이</th>
+    <th>작성일자</th>
+  </tr>
+  {% for post in post_list %}
+  <tr>
+    <td>{{ post.id }}</td>
+    <td>{{ post.title }}</td>
+    <td>{{ post.author }}</td>
+    <td>{{ post.create_at }}<td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+  <p>로그인을 먼저 하세요.</p>
+  <a href="{% url 'login' %}">Login</a>
+{% endif %}
 {% endblock %}
