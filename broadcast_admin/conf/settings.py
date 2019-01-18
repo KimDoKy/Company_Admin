@@ -23,8 +23,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +37,10 @@ INSTALLED_APPS = [
     'product',
     'payments',
     'customers',
+    'board',
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,5 +123,9 @@ USE_THOUSAND_SEPARATOR= True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login'
+STATICFIlES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    ]
+
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = '/login/'

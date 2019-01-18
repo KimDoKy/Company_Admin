@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='ko'>
+
+<head>
+<title>{% block title %}Admin System{% endblock %}</title>
+
+{% load staticfiles %}
+</head>
+
+<body>
+
+{% if user.is_authenticated %}
+
+<div id='menu'>
+  <li>시스템 관리</li>
+    <ul>
+      <li>내 정보 관리</li>
+      <li>사용자 관리</li>
+      <li>부서 관리</li>
+      <li>승인회사 관리</li>
+    </ul>
+  <li>상품관리</li>
+    <ul>
+      <li>상품 등록</li>
+      <li>상품 관리</li>
+    </ul>
+  <li>업체관리</li>
+    <ul>
+      <li>업체 등록</li>
+      <li>내 업체 관리</li>
+    </ul>
+  <li>매출/정산관리</li>
+    <ul>
+      <li>전체 매출 관리</li>
+      <li>일일 매출 관리</li>
+      <li>월별 매출 관리</li>
+      <li>세금계산서 관리</li>
+  <li>게시판</li>
+    <ul>
+      <li>공지사항</li>
+      <li>업무전용 게시판</li>
+      <li>자유게시판</li>
+    </ul>
+  <li>직원현황</li>
+</div>
+<a href="{% url 'logout' %}">Logout</a>
+
+{% else %}
+
+로그인하세요.
+<a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+
+{% block content %}
+{% endblock %}
